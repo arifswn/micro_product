@@ -38,10 +38,8 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 
 ### Running Aplikasi
 
-```markdown
 1. Buka **folder project micro_product** lalu menuju terminal atau pada direktori ***`./micro_product`***
 2. Masukkan perintah berikut pada terminal
-```
 
 ```markdown
 go run main.go
