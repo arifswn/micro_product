@@ -41,7 +41,7 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 1. Jika menggunakan XAMPP Server, aktifkan database MySQL.
 2. Buka dan login di **localhost/phpmyadmin** atau bisa menggunakan **adminer.php** untuk manage database
 3. Setelah itu login ke dalam database server, dan ***Create Database : `db_micro`***
-4. Config database berada di lokasi **folder project `micro_product/database/db.go`** dan config pada bagian berikut :
+4. Config database berada di lokasi **folder project `micro_product/database/db.go`**
 
 #### Config Database
 
