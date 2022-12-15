@@ -11,7 +11,7 @@ import (
 // config db
 const (
 	username = "root"
-	password = "lupaLagi"
+	password = "root"
 	hostname = "127.0.0.1:3333"
 	dbname   = "db_micro"
 )
