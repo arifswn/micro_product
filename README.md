@@ -45,7 +45,7 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 
 #### Config Database
 
-```json
+```markdown
 const (
  username = "root"
  password = "root"
