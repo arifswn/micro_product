@@ -1,0 +1,732 @@
+basePath: /api/v1
+definitions:
+  models.LoginUserInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.LoginUserResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  models.OrderCancel:
+    properties:
+      id_order:
+        type: integer
+    type: object
+  models.OrderCancelResponse:
+    properties:
+      id_order:
+        type: integer
+      id_product:
+        type: integer
+      id_user:
+        type: integer
+      product:
+        $ref: '#/definitions/models.ProductOrder'
+      qty:
+        type: integer
+      status:
+        $ref: '#/definitions/models.StatusAllowed'
+      tgl_cancel:
+        type: string
+      tgl_checkout:
+        type: string
+      tgl_order:
+        type: string
+      total:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.OrderCart:
+    properties:
+      id_product:
+        type: integer
+      qty:
+        type: integer
+    required:
+    - id_product
+    - qty
+    type: object
+  models.OrderCartResponse:
+    properties:
+      created_at:
+        type: string
+      id_order:
+        type: integer
+      id_product:
+        type: integer
+      id_user:
+        type: integer
+      product:
+        $ref: '#/definitions/models.ProductOrder'
+      qty:
+        type: integer
+      status:
+        $ref: '#/definitions/models.StatusAllowed'
+      tgl_order:
+        type: string
+      total:
+        type: integer
+    type: object
+  models.OrderCheckout:
+    properties:
+      id_order:
+        type: integer
+    type: object
+  models.OrderCheckoutResponse:
+    properties:
+      id_order:
+        type: integer
+      id_product:
+        type: integer
+      id_user:
+        type: integer
+      product:
+        $ref: '#/definitions/models.ProductOrder'
+      qty:
+        type: integer
+      status:
+        $ref: '#/definitions/models.StatusAllowed'
+      tgl_checkout:
+        type: string
+      tgl_order:
+        type: string
+      total:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.OrderGetResponse:
+    properties:
+      created_at:
+        type: string
+      id_order:
+        type: integer
+      id_product:
+        type: integer
+      id_user:
+        type: integer
+      product:
+        $ref: '#/definitions/models.ProductOrder'
+      qty:
+        type: integer
+      status:
+        $ref: '#/definitions/models.StatusAllowed'
+      tgl_cancel:
+        type: string
+      tgl_checkout:
+        type: string
+      tgl_order:
+        type: string
+      total:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.ProductGetResponse:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id_product:
+        type: integer
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.ProductInput:
+    properties:
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+    required:
+    - price
+    - product_name
+    - stock
+    type: object
+  models.ProductInputResponse:
+    properties:
+      created_at:
+        type: string
+      id_product:
+        type: integer
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+    type: object
+  models.ProductOrder:
+    properties:
+      id_product:
+        type: integer
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+    type: object
+  models.ProductUpdate:
+    properties:
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+    required:
+    - price
+    - product_name
+    - stock
+    type: object
+  models.ProductUpdateResponse:
+    properties:
+      id_product:
+        type: integer
+      price:
+        type: integer
+      product_name:
+        type: string
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.RegisterUserInput:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - age
+    - email
+    - password
+    - username
+    type: object
+  models.RegisterUserResponse:
+    properties:
+      age:
+        type: integer
+      created_at:
+        type: string
+      email:
+        type: string
+      id_user:
+        type: integer
+      username:
+        type: string
+    type: object
+  models.StatusAllowed:
+    enum:
+    - cart
+    - checkout
+    - cancel
+    type: string
+    x-enum-varnames:
+    - cart
+    - checkout
+    - cancel
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Microservices Product
+  version: "1.0"
+paths:
+  /orders:
+    get:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan order get by id yser
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+      security:
+      - BearerAuth: []
+      summary: Order Get By Id User
+      tags:
+      - Orders
+  /orders/{orderId}:
+    get:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan order get by id order
+      parameters:
+      - description: ID
+        in: path
+        name: orderId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OrderGetResponse'
+      security:
+      - BearerAuth: []
+      summary: Order Get By Id Order
+      tags:
+      - Orders
+  /orders/cancel:
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan order cancel
+      parameters:
+      - description: Order Checkout
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrderCancel'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderCancelResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OrderCancelResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OrderCancelResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.OrderCancelResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OrderCancelResponse'
+      security:
+      - BearerAuth: []
+      summary: Order Cancel
+      tags:
+      - Orders
+  /orders/cart:
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan order cart
+      parameters:
+      - description: Order Cart
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrderCart'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.OrderCartResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OrderCartResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OrderCartResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.OrderCartResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OrderCartResponse'
+      security:
+      - BearerAuth: []
+      summary: Order Cart
+      tags:
+      - Orders
+  /orders/checkout:
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan order checkout
+      parameters:
+      - description: Order Checkout
+        in: body
+        name: Order
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrderCheckout'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OrderCheckoutResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OrderCheckoutResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OrderCheckoutResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.OrderCheckoutResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OrderCheckoutResponse'
+      security:
+      - BearerAuth: []
+      summary: Order Checkout
+      tags:
+      - Orders
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan get all product
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+      security:
+      - BearerAuth: []
+      summary: Get All Product
+      tags:
+      - Products
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan create product
+      parameters:
+      - description: Create Product
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.ProductInputResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ProductInputResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ProductInputResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.ProductInputResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ProductInputResponse'
+      security:
+      - BearerAuth: []
+      summary: Create Product
+      tags:
+      - Products
+  /products/{productId}:
+    delete:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan delete product
+      parameters:
+      - description: ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "422":
+          description: Unprocessable Entity
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: Delete Product
+      tags:
+      - Products
+    get:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan get product by id product
+      parameters:
+      - description: ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ProductGetResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Product By ID Product
+      tags:
+      - Products
+    put:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan update product
+      parameters:
+      - description: ID
+        in: path
+        name: productId
+        required: true
+        type: integer
+      - description: Update Product
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProductUpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ProductUpdateResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ProductUpdateResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.ProductUpdateResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ProductUpdateResponse'
+      security:
+      - BearerAuth: []
+      summary: Update Product
+      tags:
+      - Products
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan login user
+      parameters:
+      - description: Login User
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginUserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+      summary: Login User
+      tags:
+      - Users
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Digunakan untuk melakukan register user
+      parameters:
+      - description: Register User
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.RegisterUserInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.RegisterUserResponse'
+      summary: Registration User
+      tags:
+      - Users
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
