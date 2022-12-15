@@ -30,16 +30,18 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 >     - Update **Qty** product, jika ada product yang sudah pernah di order
 >     - Membuat order product baru, jika ada product yang sudah pernah di order dalam status **cancel** dan **checkout**
 >   - Order Checkout
->     - Update status order menjadi **checkout** dan **Stock** berkurang/diperbarui di tabel *products*
+>     - Update status order menjadi **checkout** dan **Stock** berkurang atau diperbarui di tabel *products*
 >     - Tidak bisa melakukan **checkout** jika status order **cancel**
 >   - Order Cancel
->     - Update **Stock** pada tabel product / rollback **Stock** dan update status order menjadi **cancel**
+>     - Update **Stock** pada tabel product atau rollback **Stock** dan update status order menjadi **cancel**
 >     - Dibuat kondisi supaya jika di lakukan ***Order Cancel*** tidak dapat melakukan ***Hit Request***
 
 ### Running Aplikasi
 
-1. Buka **folder project micro_product** lalu menuju terminal / pada direktori ***`./micro_product`***
+```markdown
+1. Buka **folder project micro_product** lalu menuju terminal atau pada direktori ***`./micro_product`***
 2. Masukkan perintah berikut pada terminal
+```
 
 ```markdown
 go run main.go
@@ -54,9 +56,9 @@ go run main.go
 
 ### Test Menggunakan Swagger
 
-> - Buka [**Link Berikut**](http://localhost:8080/swagger/index.html) pada browser ***Chrome / Mozila***
+> - Buka [**Link Berikut**](http://localhost:8080/swagger/index.html) pada browser ***Chrome atau Mozila***
 > - Halaman **swagger** akan terbuka dan Lakukan tes pada setiap Endpoint
-> - ***Catatan** sebelum melakukan test menggunakan swagger, pastikan aplikasi sudah **Running**
+> - ***Catatan*** sebelum melakukan test menggunakan swagger, pastikan aplikasi sudah **Running**
 
 ### Tentang Saya
 
