@@ -7,6 +7,7 @@ import (
 )
 
 func AuthRoutes(router *gin.Engine) {
+
 	authRouter := router.Group("/api/v1/users")
 	{
 		// Register User

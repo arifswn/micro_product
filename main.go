@@ -57,6 +57,7 @@ func main() {
 
 	database.StartDB()
 	r := routers.SetupRoutes()
+
 	r.Run(":" + appConfig.AppPort)
 
 }

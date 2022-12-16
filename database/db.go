@@ -12,7 +12,7 @@ import (
 const (
 	username = "root"
 	password = ""
-	hostname = "localhost"
+	hostname = "127.0.0.1:3333"
 	dbname   = "db_micro"
 )
 

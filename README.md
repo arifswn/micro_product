@@ -43,7 +43,7 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 3. Setelah itu login ke dalam database server, dan ***Create Database : `db_micro`***
 4. Config database berada di lokasi **folder project `micro_product/database/db.go`**
 
-#### Config Database
+### Config Database
 
 ```markdown
 const (
@@ -80,6 +80,21 @@ go run main.go
 > - Buka [**Link Berikut**](http://localhost:8080/swagger/index.html) pada browser ***Chrome atau Mozila***
 > - Halaman **swagger** akan terbuka dan Lakukan tes pada setiap Endpoint
 > - ***Catatan*** sebelum melakukan test menggunakan swagger, pastikan aplikasi sudah **Running**
+
+### Logger
+
+> Setiap mengakses Endpoint terdapat Logger formatter dari Gin, yang akan di cetak melalui **console**
+
+```json
+{
+  "method" : "POST",
+  "path" : "/api/v1/users/login",
+  "remote_addr" : "::1",
+  "response_time" : "31.899792ms",
+  "start_time" : "2022/12/16 - 09:38:05",
+  "status_code" : 200
+}
+```
 
 ### Tentang Saya
 
