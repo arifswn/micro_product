@@ -41,17 +41,15 @@ Program sederhana ini merupakan sample REST Api menggunakan bahasa pemrograman G
 1. Jika menggunakan XAMPP Server, aktifkan database MySQL.
 2. Buka dan login di **localhost/phpmyadmin** atau bisa menggunakan **adminer.php** untuk manage database
 3. Setelah itu login ke dalam database server, dan ***Create Database : `db_micro`***
-4. Config database berada di lokasi **folder project `micro_product/database/db.go`**
+4. Config database berada di lokasi **folder project `.env`**
 
 ### Config Database
 
-```markdown
-const (
- username = "root"
- password = ""
- hostname = "localhost"
- dbname   = "db_micro"
-)
+```env
+  DB_NAME=db_micro
+  DB_HOST=127.0.0.1:3333
+  DB_USERNAME=root
+  DB_PASSWORD=lupaLagi
 ```
 
 > - Setelah itu jalankan aplikasi, maka aplikasi akan melakukan migrate database
