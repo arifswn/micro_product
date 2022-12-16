@@ -18,8 +18,11 @@ func SetupRoutes() *gin.Engine {
 	r := gin.New()
 	r.MaxMultipartMemory = 8 << 20 // 8 MiB
 
+	r.Use(CORSMiddleware()) // using cors
+
 	r.Use(gin.Recovery())         // to recover gin automatically
 	r.Use(jsonLoggerMiddleware()) // we'll define it later
+
 	r.Use(location.Default())
 
 	// call to browser http://localhost:8080/swagger/index.html
@@ -49,4 +52,21 @@ func jsonLoggerMiddleware() gin.HandlerFunc {
 			return string(s) + "\n"
 		},
 	)
+}
+
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, PUT, DELETE, GET")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }

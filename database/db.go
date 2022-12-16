@@ -3,17 +3,11 @@ package database
 import (
 	"fmt"
 	"micro_product/models"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-)
-
-// config db
-const (
-	username = "root"
-	password = ""
-	hostname = "127.0.0.1:3333"
-	dbname   = "db_micro"
+	"github.com/joho/godotenv"
 )
 
 var (
@@ -22,9 +16,19 @@ var (
 )
 
 func StartDB() {
+	err := godotenv.Load()
+	if err != nil {
+		panic("Can't load configuration : " + err.Error())
+	}
+
+	// load db configuration
+	DBName := os.Getenv("DB_NAME")
+	DBUsername := os.Getenv("DB_USERNAME")
+	DBPassword := os.Getenv("DB_PASSWORD")
+	DBHost := os.Getenv("DB_HOST")
 
 	// conn db
-	db, err = gorm.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&loc=Local", username, password, hostname, dbname))
+	db, err = gorm.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true&loc=Local", DBUsername, DBPassword, DBHost, DBName))
 	if err != nil {
 		panic("Failed connect to database : " + err.Error())
 	}

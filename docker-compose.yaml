@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: lupaLagi
+      MYSQL_DATABASE: db_micro
+    ports:
+      - "3030:3306"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

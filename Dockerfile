@@ -1,11 +1,17 @@
-FROM golang:1.18
+ARG GO_VERSION=1.18
 
-WORKDIR /go/src/app
+FROM golang:${GO_VERSION} AS builder
 
-COPY main.go .
+WORKDIR /
 
-RUN go build -o main .
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+COPY . .
+RUN go build -o ./main main.go
 
 EXPOSE 8080
 
-CMD ["./main"]
+ENTRYPOINT ["./main"]
