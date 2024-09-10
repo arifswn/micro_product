@@ -71,7 +71,6 @@ go run main.go
 > - Menuju [**Link Berikut**](./micro_product.postman_collection.json) untuk melakukan unduh file atau pada area **code** anda dapat melakukan ***CTRL + S*** atau klik simpan sebagai **file** dengan **nama_file.json**
 > - Buka aplikasi postman lalu import ***file json*** pada aplikasi Postman
 > - Terdapat **collection request** dan lakukan tes pada setiap **Endpoint**
-> - ***Alternatif*** membuka **collection request** menggunakan **Postman Public Api Network** [**Link Berikut**](https://postman.com/arsetsoft/workspace/go-microservices/documentation/18056562-47a0fed6-ecb7-4241-925e-ce6e49b881ce)
 
 ### Test Menggunakan Swagger
 
